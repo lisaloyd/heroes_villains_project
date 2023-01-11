@@ -19,10 +19,14 @@ def supers_list(request):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-@api_view(['GET'])
+@api_view(['GET', 'PUT'])
 def super_detail(request, pk): 
     super = get_object_or_404(Super, pk=pk)
-    serializer = SuperSerializer(super);
-    return Response(serializer.data)
-
-   
+    if request.method == 'GET':
+        serializer = SuperSerializer(super);
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = SuperSerializer(super, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
