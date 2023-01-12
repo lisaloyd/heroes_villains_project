@@ -10,13 +10,13 @@ def supers_list(request):
 
     if request.method == 'GET':
 
-        super_type = request.query_params.get('hero')
-        print(super_type)
+        super_type_hero = request.query_params.get('hero')
+        print(super_type_hero)
 
         queryset = Super.objects.all()
 
-        if super_type:
-            queryset = queryset.filter(super_type=super_type)
+        if super_type_hero:
+            queryset = queryset.filter(super_type_hero=super_type_hero)
 
         supers = Super.objects.all()
         serializer = SuperSerializer(supers, many=True)
