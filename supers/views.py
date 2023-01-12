@@ -9,6 +9,15 @@ from rest_framework import status
 def supers_list(request):
 
     if request.method == 'GET':
+
+        super_type = request.query_params.get('hero')
+        print(super_type)
+
+        queryset = Super.objects.all()
+
+        if super_type:
+            queryset = queryset.filter(super_type=super_type)
+
         supers = Super.objects.all()
         serializer = SuperSerializer(supers, many=True)
         return Response(serializer.data)

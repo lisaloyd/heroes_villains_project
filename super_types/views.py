@@ -8,7 +8,7 @@ from rest_framework import status
 def super_types_list(request):
 
     if request.method == 'GET':
-        super_types_list = Super_types.objects.all()
+        super_types_list = SuperType.objects.all()
         serializer = SuperTypeSerializer(super_types_list, many=True)
         return Response(serializer.data)
 
